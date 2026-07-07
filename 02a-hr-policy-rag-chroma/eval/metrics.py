@@ -30,6 +30,7 @@ def recall_at_k(retrieved_docs: list[Document], expected_source_doc: Optional[st
     Returns:
         1.0 if any retrieved chunk's source matches (extension ignored),
         0.0 if none do, or None if there was nothing to check against.
+        
     """
     if not expected_source_doc:
         return None
