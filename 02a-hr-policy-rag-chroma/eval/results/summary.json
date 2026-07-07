@@ -1,0 +1,10 @@
+{
+  "num_questions": 25,
+  "num_scored": 22,
+  "num_negative_control": 3,
+  "recall_at_k": 1.0,
+  "groundedness": 4.818181818181818,
+  "citation_accuracy": 0.9545454545454546,
+  "answer_relevance": 4.7272727272727275,
+  "negative_control_refusal_accuracy": 1.0
+}
