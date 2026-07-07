@@ -1,0 +1,202 @@
+[
+  {
+    "id": "qa_001",
+    "question": "How many PTO days do I get after 4 years of service?",
+    "expected_answer": "20 days per year (1.67 days/month accrual), based on the 3-5 years of service tier.",
+    "source_doc": "01_PTO_Policy",
+    "source_section": "Section 3 - Accrual Rates",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_002",
+    "question": "Can I carry over unused PTO into next year?",
+    "expected_answer": "Yes, up to 5 unused PTO days may be carried over. Anything beyond that is forfeited on Dec 31, unless state law requires otherwise.",
+    "source_doc": "01_PTO_Policy",
+    "source_section": "Section 4 - Carryover",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_003",
+    "question": "Do Directors accrue PTO the same way as other employees?",
+    "expected_answer": "No, Directors and above are on Flexible PTO with no accrual, no payout, but a minimum expectation of 15 days off per year.",
+    "source_doc": "01_PTO_Policy",
+    "source_section": "Section 8-9",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_004",
+    "question": "What happens to my unused PTO if I quit?",
+    "expected_answer": "Unused accrued PTO is paid out at the employee's current base rate upon termination, per state law.",
+    "source_doc": "01_PTO_Policy",
+    "source_section": "Section 7 - PTO Payout",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_005",
+    "question": "When does my health insurance coverage start as a new employee?",
+    "expected_answer": "Coverage begins on the first day of the month following 30 days of employment.",
+    "source_doc": "02_Health_Benefits_Policy",
+    "source_section": "Section 2 - Eligibility & Enrollment",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_006",
+    "question": "Does the company contribute to my HSA?",
+    "expected_answer": "Yes, $1,000/year for employees enrolled in the High-Deductible Plan B (HSA-eligible).",
+    "source_doc": "02_Health_Benefits_Policy",
+    "source_section": "Section 3 - Medical Plans",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_007",
+    "question": "How much is the vision allowance for frames or contacts?",
+    "expected_answer": "$150 allowance toward frames/lenses or contacts, plus a fully covered annual eye exam.",
+    "source_doc": "02_Health_Benefits_Policy",
+    "source_section": "Section 4 - Dental & Vision",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_008",
+    "question": "Up to what age can I keep my child on my health plan?",
+    "expected_answer": "Dependent children can be covered up to age 26.",
+    "source_doc": "02_Health_Benefits_Policy",
+    "source_section": "Section 5 - Dependent Coverage",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_009",
+    "question": "How many sessions does the EAP cover?",
+    "expected_answer": "Up to 6 free confidential counseling sessions per year, per issue.",
+    "source_doc": "02_Health_Benefits_Policy",
+    "source_section": "Section 7 - Wellness Program",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_010",
+    "question": "How many weeks of paid leave does a birthing parent get?",
+    "expected_answer": "12 weeks fully paid, running concurrently with FMLA where applicable.",
+    "source_doc": "03_Leave_of_Absence_Policy",
+    "source_section": "Section 3 - Parental Leave",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_011",
+    "question": "Am I eligible for FMLA if I've only worked here 6 months?",
+    "expected_answer": "No, FMLA requires 12+ months of service and 1,250+ hours worked in the prior 12 months, at a location with 50+ employees within 75 miles.",
+    "source_doc": "03_Leave_of_Absence_Policy",
+    "source_section": "Section 2 - Family and Medical Leave (FMLA)",
+    "category": "eligibility_reasoning"
+  },
+  {
+    "id": "qa_012",
+    "question": "How many paid bereavement days do I get for losing a grandparent?",
+    "expected_answer": "2 paid days, since a grandparent is classified as extended family.",
+    "source_doc": "03_Leave_of_Absence_Policy",
+    "source_section": "Section 5 - Bereavement Leave",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_013",
+    "question": "Is my job protected if I take jury duty leave?",
+    "expected_answer": "Full pay is continued for up to 10 business days with court documentation; additional unpaid leave is available if service extends longer.",
+    "source_doc": "03_Leave_of_Absence_Policy",
+    "source_section": "Section 6 - Jury Duty & Court Appearances",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_014",
+    "question": "How often do I need to check in with HR while on leave?",
+    "expected_answer": "At least every 30 days regarding return-to-work status.",
+    "source_doc": "03_Leave_of_Absence_Policy",
+    "source_section": "Section 9 - Requesting Leave",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_015",
+    "question": "How many days a week do hybrid employees need to be in office?",
+    "expected_answer": "Minimum 2 days/week, on the designated core days (Tue/Wed/Thu).",
+    "source_doc": "04_Remote_Work_Policy",
+    "source_section": "Section 2 - Work Location Categories",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_016",
+    "question": "What is the home office stipend for new fully remote hires?",
+    "expected_answer": "A one-time $300 home office setup stipend, plus $50/month internet reimbursement.",
+    "source_doc": "04_Remote_Work_Policy",
+    "source_section": "Section 4 - Equipment & Reimbursement",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_017",
+    "question": "Can I work from another country for a month without approval?",
+    "expected_answer": "No, international remote work requires 30 days' advance notice and Legal/HR sign-off, with a max of 20 business days/year without a formal international employment agreement.",
+    "source_doc": "04_Remote_Work_Policy",
+    "source_section": "Section 7 - Out-of-State / International Remote Work",
+    "category": "eligibility_reasoning"
+  },
+  {
+    "id": "qa_018",
+    "question": "What are the core collaboration hours I need to be available for?",
+    "expected_answer": "10:00 AM to 3:00 PM in the employee's assigned time zone.",
+    "source_doc": "04_Remote_Work_Policy",
+    "source_section": "Section 5 - Work Hours & Availability",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_019",
+    "question": "What is the employer 401k match if I contribute 5% of my salary?",
+    "expected_answer": "100% match on the first 3%, plus 50% match on the next 2%, totaling a 4% employer match.",
+    "source_doc": "05_Retirement_401k_Policy",
+    "source_section": "Section 4 - Employer Matching",
+    "category": "calculation"
+  },
+  {
+    "id": "qa_020",
+    "question": "Am I fully vested in employer match after 2 years?",
+    "expected_answer": "No, only 50% vested after 2 years. Full vesting (100%) occurs at 4+ years of service.",
+    "source_doc": "05_Retirement_401k_Policy",
+    "source_section": "Section 5 - Vesting Schedule",
+    "category": "eligibility_reasoning"
+  },
+  {
+    "id": "qa_021",
+    "question": "What's the maximum 401k loan I can take?",
+    "expected_answer": "Up to 50% of vested balance, capped at $50,000, repaid via payroll deduction over up to 5 years.",
+    "source_doc": "05_Retirement_401k_Policy",
+    "source_section": "Section 7 - Loans & Hardship Withdrawals",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_022",
+    "question": "When am I automatically enrolled in the 401k plan and at what rate?",
+    "expected_answer": "Auto-enrollment at 4% of salary (pre-tax) on the first payroll cycle after 90 days of employment and reaching age 21, unless the employee opts out or changes the rate.",
+    "source_doc": "05_Retirement_401k_Policy",
+    "source_section": "Section 2 - Eligibility & Enrollment",
+    "category": "factual_lookup"
+  },
+  {
+    "id": "qa_023",
+    "question": "Does the company offer a signing bonus for new hires?",
+    "expected_answer": "Not covered in the available policy documents.",
+    "source_doc": null,
+    "source_section": null,
+    "category": "negative_control"
+  },
+  {
+    "id": "qa_024",
+    "question": "What is the company's policy on stock options and equity grants?",
+    "expected_answer": "Not covered in the available policy documents.",
+    "source_doc": null,
+    "source_section": null,
+    "category": "negative_control"
+  },
+  {
+    "id": "qa_025",
+    "question": "What is the process for filing an expense reimbursement report?",
+    "expected_answer": "Not covered in the available policy documents.",
+    "source_doc": null,
+    "source_section": null,
+    "category": "negative_control"
+  }
+]
