@@ -1,0 +1,86 @@
+name: Eval HR Policy RAG (Pinecone)
+
+on:
+  pull_request:
+    paths:
+      - "02b-hr-policy-rag-pinecone/**"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 02b-hr-policy-rag-pinecone
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build index
+        run: python pipeline/build_index.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
+          PINECONE_INDEX_NAME: ${{ vars.PINECONE_INDEX_NAME }}
+
+      - name: Run eval
+        run: python eval/run_eval.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
+          PINECONE_INDEX_NAME: ${{ vars.PINECONE_INDEX_NAME }}
+
+      - name: Render scorecard chart
+        run: python eval/plot_results.py
+
+      - name: Upload eval results
+        uses: actions/upload-artifact@v6
+        with:
+          name: eval-results
+          path: |
+            02b-hr-policy-rag-pinecone/eval/results/summary.json
+            02b-hr-policy-rag-pinecone/eval/results/scorecard.png
+
+      - name: Post summary as PR comment
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require("fs");
+            const summary = JSON.parse(
+              fs.readFileSync("02b-hr-policy-rag-pinecone/eval/results/summary.json", "utf8")
+            );
+
+            const fmtPct = (v) => (v === null || v === undefined ? "n/a" : `${(v * 100).toFixed(1)}%`);
+            const fmtScore = (v) => (v === null || v === undefined ? "n/a" : `${v.toFixed(2)} / 5`);
+
+            const body = [
+              "### HR Policy RAG (Pinecone) — Eval Results",
+              "",
+              "| Metric | Score |",
+              "|---|---|",
+              `| Recall@k | ${fmtPct(summary.recall_at_k)} |`,
+              `| Groundedness | ${fmtScore(summary.groundedness)} |`,
+              `| Citation Accuracy | ${fmtPct(summary.citation_accuracy)} |`,
+              `| Answer Relevance | ${fmtScore(summary.answer_relevance)} |`,
+              `| Negative Control Refusal Accuracy | ${fmtPct(summary.negative_control_refusal_accuracy)} |`,
+              "",
+              `_${summary.num_questions} questions (${summary.num_scored} scored, ${summary.num_negative_control} negative control)_`,
+            ].join("\n");
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
