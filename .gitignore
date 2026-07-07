@@ -216,3 +216,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Persisted vector stores
+**/db/chroma_db/
+
+.DS_Store
+.claude/
+**/eval/results/
+docs/requirements.md
