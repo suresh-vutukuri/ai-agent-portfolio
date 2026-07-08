@@ -1,0 +1,5 @@
+# Requires Python <3.14 - crewai pulls in chromadb, whose pydantic.v1 compat
+# shim breaks on 3.14 (ConfigError on import). Verified working on 3.12.
+crewai
+crewai-tools
+python-dotenv
