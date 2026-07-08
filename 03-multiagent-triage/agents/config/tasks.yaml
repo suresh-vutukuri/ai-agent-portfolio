@@ -1,0 +1,26 @@
+triage_task:
+  description: >
+    Read the customer's query: "{query}"
+
+    Classify it into exactly one category: billing, technical, or returns.
+    Identify which specialist should handle it and briefly explain why,
+    citing the specific words or details in the query that point to that
+    category.
+  expected_output: >
+    A short classification note stating the category (billing, technical,
+    or returns) and a one-sentence justification referencing the query.
+
+resolve_task:
+  description: >
+    Using the classification from the triage step, delegate this query to
+    the correct specialist: "{query}"
+
+    The specialist must use their available tools to look up real data
+    (invoice/payment records, system status/error codes, or order/refund
+    details as appropriate) rather than guessing. Once the specialist
+    responds, review their answer for accuracy, completeness, and tone
+    before finalizing it.
+  expected_output: >
+    A single, customer-ready response that directly answers the query,
+    grounded in the data returned by the specialist's tool calls, with no
+    unresolved placeholders or internal notes.

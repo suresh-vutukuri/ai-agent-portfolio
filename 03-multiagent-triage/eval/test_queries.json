@@ -1,0 +1,77 @@
+[
+  {
+    "id": "Q01",
+    "query": "Why was I charged twice this month?",
+    "expected_specialist": "billing"
+  },
+  {
+    "id": "Q02",
+    "query": "Can you tell me when my next payment is due?",
+    "expected_specialist": "billing"
+  },
+  {
+    "id": "Q03",
+    "query": "I don't understand the amount on invoice INV-5002, can you break it down for me?",
+    "expected_specialist": "billing"
+  },
+  {
+    "id": "Q04",
+    "query": "My card was declined but I'm pretty sure I already paid this bill - what's going on?",
+    "expected_specialist": "billing"
+  },
+  {
+    "id": "Q05",
+    "query": "Can I get a copy of my last three payments? I need it for an expense report.",
+    "expected_specialist": "billing"
+  },
+  {
+    "id": "Q06",
+    "query": "Your app keeps timing out whenever I try to log in.",
+    "expected_specialist": "tech"
+  },
+  {
+    "id": "Q07",
+    "query": "I'm getting error code ERR_AUTH_401 every time I sign in, even with the right password.",
+    "expected_specialist": "tech"
+  },
+  {
+    "id": "Q08",
+    "query": "Is the notification service down right now? I haven't gotten any alerts all day.",
+    "expected_specialist": "tech"
+  },
+  {
+    "id": "Q09",
+    "query": "The dashboard won't load, it just spins forever no matter what I do.",
+    "expected_specialist": "tech"
+  },
+  {
+    "id": "Q10",
+    "query": "I keep getting a 429 error when I call the API, is something rate-limiting me?",
+    "expected_specialist": "tech"
+  },
+  {
+    "id": "Q11",
+    "query": "I want to return the keyboard I ordered, it's not what I expected.",
+    "expected_specialist": "returns"
+  },
+  {
+    "id": "Q12",
+    "query": "Can I get a refund for order ORD-1002?",
+    "expected_specialist": "returns"
+  },
+  {
+    "id": "Q13",
+    "query": "My order arrived damaged, how do I send it back for a replacement?",
+    "expected_specialist": "returns"
+  },
+  {
+    "id": "Q14",
+    "query": "It's been over a month since I ordered - can I still return it at this point?",
+    "expected_specialist": "returns"
+  },
+  {
+    "id": "Q15",
+    "query": "I canceled my order last week but I'm not sure if I'll actually get my money back.",
+    "expected_specialist": "returns"
+  }
+]
