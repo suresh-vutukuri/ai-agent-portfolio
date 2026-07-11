@@ -110,9 +110,12 @@ def _format_findings(findings: Dict[str, Dict[str, list]]) -> str:
 async def _run_review_query(diff_text: str, findings_text: str) -> str:
     """Send the diff and lint findings to Claude and collect the final review text.
 
-    Uses the Claude Agent SDK's query() for a single-turn, tool-free request:
-    allowed_tools=[] means Claude reasons only over the prompt text (it never
-    tries to read the repo itself), and max_turns=1 caps this to one exchange.
+    Uses the Claude Agent SDK's query() for a tool-free request: allowed_tools=[]
+    means Claude reasons only over the prompt text (it never tries to read the
+    repo itself). max_turns=8 gives Claude room for its own internal turns
+    (e.g. planning before the final answer) - max_turns=1 was too tight and
+    the query would fail with "Reached maximum number of turns (1)" before
+    producing a review.
 
     Args:
         diff_text: The PR's unified diff.
@@ -137,7 +140,7 @@ async def _run_review_query(diff_text: str, findings_text: str) -> str:
         system_prompt=REVIEW_SYSTEM_PROMPT,
         model=MODEL,
         allowed_tools=[],
-        max_turns=1,
+        max_turns=8,
     )
 
     review_text = ""
