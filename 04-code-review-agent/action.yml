@@ -10,11 +10,11 @@ inputs:
     description: >-
       Token used to fetch the PR diff/file contents and post the review
       comment (needs repo read + pull request write access). In CI, pass the
-      workflow's automatic ${{ secrets.GITHUB_TOKEN }} - the calling
-      workflow's `permissions: pull-requests: write` block is what actually
-      grants it comment-posting rights. For local runs (outside CI), use
-      your own fine-grained personal access token instead - see the project
-      README's Setup section.
+      workflow's automatic secrets.GITHUB_TOKEN - the calling workflow's
+      `permissions: pull-requests: write` block is what actually grants it
+      comment-posting rights. For local runs (outside CI), use your own
+      fine-grained personal access token instead - see the project README's
+      Setup section.
     required: true
   anthropic-api-key:
     description: >-
