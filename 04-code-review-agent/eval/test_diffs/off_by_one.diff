@@ -1,0 +1,7 @@
+--- /dev/null
++++ b/app/collections_utils.py
+@@ -0,0 +1,4 @@
++def get_last_n_items(items: list[str], n: int) -> list[str]:
++    """Return the last n items from the list."""
++    start = len(items) - n
++    return items[start + 1:]

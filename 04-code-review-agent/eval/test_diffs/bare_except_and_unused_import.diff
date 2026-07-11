@@ -1,0 +1,14 @@
+--- /dev/null
++++ b/app/parser.py
+@@ -0,0 +1,11 @@
++import json
++import sys
++
++
++def parse_config(path: str) -> dict:
++    """Parse a JSON config file, returning an empty dict on any error."""
++    try:
++        with open(path) as f:
++            return json.load(f)
++    except:
++        return {}

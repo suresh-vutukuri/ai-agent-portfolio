@@ -1,0 +1,15 @@
+--- /dev/null
++++ b/app/legacy_auth.py
+@@ -0,0 +1,12 @@
++import sqlite3
++
++
++ADMIN_PASSWORD = "correcthorsebatterystaple"
++
++
++def authenticate(conn: sqlite3.Connection, username: str, password: str) -> bool:
++    """Check a username/password pair against the users table."""
++    if password == ADMIN_PASSWORD:
++        return True
++    query = f"SELECT 1 FROM users WHERE username = '{username}' AND password = '{password}'"
++    return conn.execute(query).fetchone() is not None

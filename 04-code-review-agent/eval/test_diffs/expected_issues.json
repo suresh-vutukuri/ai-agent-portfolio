@@ -1,0 +1,34 @@
+[
+  {
+    "diff_file": "sql_injection.diff",
+    "expected_issues": [
+      {"file": "app/db.py", "line": 6, "issue_type": "sql_injection"}
+    ]
+  },
+  {
+    "diff_file": "hardcoded_secret.diff",
+    "expected_issues": [
+      {"file": "app/config.py", "line": 5, "issue_type": "hardcoded_secret"}
+    ]
+  },
+  {
+    "diff_file": "bare_except_and_unused_import.diff",
+    "expected_issues": [
+      {"file": "app/parser.py", "line": 2, "issue_type": "unused_import"},
+      {"file": "app/parser.py", "line": 10, "issue_type": "bare_except"}
+    ]
+  },
+  {
+    "diff_file": "off_by_one.diff",
+    "expected_issues": [
+      {"file": "app/collections_utils.py", "line": 4, "issue_type": "off_by_one"}
+    ]
+  },
+  {
+    "diff_file": "mixed_security_issues.diff",
+    "expected_issues": [
+      {"file": "app/legacy_auth.py", "line": 4, "issue_type": "hardcoded_secret"},
+      {"file": "app/legacy_auth.py", "line": 11, "issue_type": "sql_injection"}
+    ]
+  }
+]

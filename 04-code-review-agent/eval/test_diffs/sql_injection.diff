@@ -1,0 +1,11 @@
+--- /dev/null
++++ b/app/db.py
+@@ -0,0 +1,8 @@
++import sqlite3
++
++
++def get_user(conn: sqlite3.Connection, username: str) -> sqlite3.Row:
++    """Look up a user by username."""
++    query = "SELECT * FROM users WHERE username = '%s'" % username
++    cursor = conn.execute(query)
++    return cursor.fetchone()

@@ -1,0 +1,66 @@
+name: "Claude Code Review"
+description: >-
+  Reviews a pull request's diff with ruff (style/lint) and bandit (security),
+  then asks Claude (via the Claude Agent SDK) to synthesize those findings
+  into a single structured, severity-tagged markdown review and post it as a
+  PR comment.
+
+inputs:
+  github-token:
+    description: >-
+      Token used to fetch the PR diff/file contents and post the review
+      comment (needs repo read + pull request write access). In CI, pass the
+      workflow's automatic ${{ secrets.GITHUB_TOKEN }} - the calling
+      workflow's `permissions: pull-requests: write` block is what actually
+      grants it comment-posting rights. For local runs (outside CI), use
+      your own fine-grained personal access token instead - see the project
+      README's Setup section.
+    required: true
+  anthropic-api-key:
+    description: >-
+      Anthropic API key used by the Claude Agent SDK to generate the review.
+      This action also installs the Claude Code CLI, which the SDK requires
+      on PATH to run at all.
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    # Composite actions never do their own checkout - the calling workflow
+    # is expected to run actions/checkout before invoking this action, so
+    # every step below assumes the repo is already present.
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: "3.12"
+
+    - name: Set up Node.js (required to install the Claude Code CLI)
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+
+    - name: Install the Claude Code CLI
+      shell: bash
+      # The Claude Agent SDK shells out to this CLI at request time - without
+      # it on PATH, agent/reviewer.py fails fast with a clear RuntimeError
+      # instead of a confusing one.
+      run: npm install -g @anthropic-ai/claude-code
+
+    - name: Install Python dependencies
+      shell: bash
+      working-directory: 04-code-review-agent
+      run: pip install -r requirements.txt
+
+    - name: Run the review agent and post it to the PR
+      shell: bash
+      working-directory: 04-code-review-agent
+      # --post is required here, or the review would only print to the job
+      # log instead of actually landing on the PR.
+      run: >-
+        python agent/run_review.py
+        --repo ${{ github.repository }}
+        --pr ${{ github.event.pull_request.number }}
+        --post
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        ANTHROPIC_API_KEY: ${{ inputs.anthropic-api-key }}

@@ -1,0 +1,9 @@
+# claude-agent-sdk requires the Claude Code CLI on PATH:
+# npm install -g @anthropic-ai/claude-code
+anthropic
+claude-agent-sdk
+PyGithub
+python-dotenv
+unidiff
+ruff
+bandit
