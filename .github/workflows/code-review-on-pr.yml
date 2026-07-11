@@ -1,0 +1,37 @@
+name: Code Review on PR
+
+on:
+  pull_request:
+    # opened: a brand-new PR. synchronize: new commits pushed to an existing
+    # PR's branch. `reopened` is deliberately left out.
+    types: [opened, synchronize]
+    # Scope to this project's sandbox/ demo files only. This workflow calls
+    # a paid Claude API on every matching push, so it must not fire on every
+    # PR across the whole portfolio monorepo - only ones that actually touch
+    # 04-code-review-agent/sandbox/, which exists specifically for triggering
+    # test PRs against this agent.
+    paths:
+      - "04-code-review-agent/sandbox/**"
+
+permissions:
+  contents: read       # only needed to check out the repo before reviewing
+  pull-requests: write # needed for the agent to post its review as a PR comment
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Run Claude code review
+        uses: ./04-code-review-agent
+        with:
+          # The default per-run Actions token, scoped by the `permissions:`
+          # block above - no manual secret setup needed for CI. This is
+          # distinct from the personal-access-token GITHUB_TOKEN used for
+          # local (non-CI) runs via .env - see the project README.
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # Must be added as a repository secret named ANTHROPIC_API_KEY
+          # under Settings > Secrets and variables > Actions.
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
