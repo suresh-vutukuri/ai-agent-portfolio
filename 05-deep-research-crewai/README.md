@@ -25,22 +25,22 @@ cp .env.example .env  # add OPENAI_API_KEY, TAVILY_API_KEY
 python run_research.py --topic "Is ICT's trading model profitable for beginners?"
 ```
 
-**Evaluation:** 5 research topics, checking citation quality across ~20 citations per report (100 citations total) on three dimensions: is the URL well-formed and reachable, does it match a real search result (no fabrication), and does an LLM-judge (gpt-4o-mini) confirm the cited claim is actually supported by that source's content.
+**Evaluation:** 5 research topics, checking citation quality across ~22 citations per report on three dimensions: is the URL well-formed and reachable, does it match a real search result (no fabrication), and does an LLM-judge (gpt-4o-mini) confirm the cited claim is actually supported by that source's content. Latest scores from the CI eval-on-PR run:
 
 | Metric | Score |
 |---|---|
 | URL Well-Formed | 100% |
-| URL Reachable (direct) | 88% |
-| URL Bot-Blocked (link is live, checker denied) | 12% |
-| URL Dead (genuinely broken) | 0% |
-| Source Matched (no fabricated citations) | 98% |
-| Avg. Groundedness (LLM-judge, 1-5) | 3.75 |
-| Citation Validity Score (composite, bot-blocks excluded) | 49% |
+| URL Reachable (direct) | 86.6% |
+| URL Bot-Blocked (link is live, checker denied) | 10.7% |
+| URL Dead (genuinely broken) | 2.7% |
+| Source Matched (no fabricated citations) | 100% |
+| Avg. Groundedness (LLM-judge, 1-5) | 4.04 |
+| Citation Validity Score (composite, bot-blocks excluded) | 58.9% |
 
 *Bot-blocked ≠ dead: academic/publisher sites (MDPI, ScienceDirect, IEEE, etc.) sit behind WAFs that reject scripted HTTP requests via TLS fingerprinting and JS challenges, regardless of headers — confirmed by manually reproducing the block outside the eval. These are tracked separately and excluded from penalizing the validity score, since the underlying links are live (see `docs/eval_harness.md`).*
 
-*The composite validity score is held down mainly by groundedness, not fabrication or dead links — most citations are real and traceable (98% source-matched), but a meaningful share of claims are only loosely supported by their cited source rather than tightly grounded. A writer-prompt change (one citation per specific claim, no combining facts across sources) was tested and did not measurably improve this — documented as a tested-but-inconclusive iteration rather than a fix, in `docs/eval_harness.md`.*
+*Scores vary somewhat run-to-run since fresh web searches return different results each time — an earlier local run scored 48.7% validity with a 3.75 judge average; this CI run scored higher. Both are documented in `docs/eval_harness.md`, including a writer-prompt change that was tested and found not to reliably move the score in either direction — a transparently-reported inconclusive iteration rather than a claimed fix.*
 
-**Why it matters:** Demonstrates the planning → search → synthesis agent pattern with citation grounding treated as a measured, adversarially-tested property rather than an assumed one — including transparently reporting where an eval fix didn't work, and correctly diagnosing a false-negative source (bot-blocking) instead of misattributing it to broken links.
+**Why it matters:** Demonstrates the planning → search → synthesis agent pattern with citation grounding treated as a measured, adversarially-tested property rather than an assumed one — including transparently reporting run-to-run variance and a tested-but-inconclusive prompt iteration, and correctly diagnosing a false-negative source (bot-blocking) instead of misattributing it to broken links.
 
 **Stack:** CrewAI (sequential process) · Tavily Search · GPT-4o-mini · Custom citation-validity eval harness
