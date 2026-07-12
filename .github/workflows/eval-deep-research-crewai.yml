@@ -1,0 +1,83 @@
+name: Eval Deep Research (CrewAI)
+
+on:
+  pull_request:
+    paths:
+      - "05-deep-research-crewai/**"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 05-deep-research-crewai
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run eval
+        run: python eval/run_eval.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+
+      - name: Upload eval results
+        uses: actions/upload-artifact@v6
+        with:
+          name: eval-results
+          path: |
+            05-deep-research-crewai/eval/results/scorecard.csv
+            05-deep-research-crewai/eval/results/summary.json
+
+      - name: Post summary as PR comment
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require("fs");
+            const summary = JSON.parse(
+              fs.readFileSync("05-deep-research-crewai/eval/results/summary.json", "utf8")
+            );
+
+            const fmtPct = (v) => (v === null || v === undefined ? "n/a" : `${(v * 100).toFixed(1)}%`);
+            const fmtScore = (v) => (v === null || v === undefined ? "n/a" : `${v.toFixed(2)} / 5`);
+            const fmtNum = (v) => (v === null || v === undefined ? "n/a" : v.toFixed(1));
+
+            const body = [
+              "### Deep Research (CrewAI) — Citation Eval Results",
+              "",
+              "_Report-only: this check does not gate the PR._",
+              "",
+              "| Metric | Score |",
+              "|---|---|",
+              `| Citation Validity Score | ${fmtPct(summary.citation_validity_score)} |`,
+              `| Avg Citations / Report | ${fmtNum(summary.avg_citations_per_report)} |`,
+              `| URL Well-Formed Rate | ${fmtPct(summary.url_well_formed_rate)} |`,
+              `| URL Reachable Rate | ${fmtPct(summary.url_reachable_rate)} |`,
+              `| URL Bot-Blocked Rate | ${fmtPct(summary.url_bot_blocked_rate)} |`,
+              `| URL Dead Rate | ${fmtPct(summary.url_dead_rate)} |`,
+              `| Source Matched Rate | ${fmtPct(summary.source_matched_rate)} |`,
+              `| Avg Judge Score | ${fmtScore(summary.avg_judge_score)} |`,
+              "",
+              `_${summary.num_topics} topics, ${summary.total_citations} citations scored._`,
+              "",
+              "_See the eval-results artifact for the per-citation scorecard._",
+            ].join("\n");
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });

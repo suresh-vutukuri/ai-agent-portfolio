@@ -1,0 +1,53 @@
+plan_task:
+  description: >
+    Break the research topic "{topic}" into 3-5 distinct sub-questions that,
+    together, cover the topic's most important facets (e.g. background,
+    current state, key players or approaches, risks/challenges, and outlook).
+    Each sub-question should be specific enough to research independently,
+    with no overlap between them.
+  expected_output: >
+    A numbered list of 3-5 sub-questions covering distinct facets of the
+    topic.
+
+research_task:
+  description: >
+    For each sub-question from the planning step, use the Web Search tool to
+    find current, sourced information that answers it. Do not rely on prior
+    knowledge alone - every factual claim must come from a search result. For
+    each sub-question, record the key findings along with the exact URL(s) of
+    the search results they came from.
+  expected_output: >
+    For each sub-question: a short set of bullet-point findings, each
+    annotated with the URL(s) it was sourced from. No claim should be left
+    without a URL.
+
+synthesize_task:
+  description: >
+    Compile the researcher's sourced findings into a single, well-organized
+    markdown report on "{topic}". Structure it with a title, a brief
+    introduction, one section per sub-question, and a concluding summary.
+    Every factual claim MUST be immediately followed by an inline citation in
+    the exact form "[Source: URL]", using the URL(s) the researcher recorded
+    for that finding. Do not invent URLs and do not state a claim without a
+    citation. End the report with a "Sources" section listing every unique
+    URL cited in the body.
+
+    Follow these citation discipline rules:
+    1. Cite only the single source that most directly supports each specific
+       claim. Do not stack multiple "[Source: URL]" citations on one
+       sentence unless each cited source independently states that exact
+       same claim on its own.
+    2. Do not combine facts drawn from multiple sources into one synthesized
+       claim. If two sources each contribute a different fact, split them
+       into separate sentences, each with its own single citation, rather
+       than merging them into one citation-stacked sentence.
+    3. Prefer specific, verifiable claims that stay close to the source's own
+       wording (numbers, dates, named entities, direct findings) over broad
+       interpretive or summarizing statements that blend several sources'
+       framing together.
+  expected_output: >
+    A complete markdown report on the topic, with inline "[Source: URL]"
+    citations after every factual claim - each claim citing the single
+    source that most directly supports it, with no multi-source
+    citation-stacked or synthesized claims - and a trailing Sources section
+    listing every URL used, ready to save directly to a file.
