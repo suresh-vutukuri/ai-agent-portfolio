@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2026-05-14",
+    "ticker": "ES=F",
+    "expected_bias": "bullish",
+    "notes": "Daily closes climbed steadily from ~7261 (2026-04-30) to ~7506 (2026-05-14) with only shallow, brief pullbacks (e.g. the 05-07 dip from 7391 to 7378) - a clean grind of higher highs and higher lows over the prior two weeks. Textbook trending-up period."
+  },
+  {
+    "date": "2026-06-10",
+    "ticker": "ES=F",
+    "expected_bias": "bearish",
+    "notes": "Price broke down from a local high of ~7624 (2026-06-02) to a new swing low of ~7305 by 2026-06-10, making lower highs and lower lows the whole way (7624 -> 7543 -> 7557 -> 7401 -> 7416 -> 7430 -> 7373 -> 7305), with only a shallow 06-04/06-07/06-08 consolidation bounce that failed to reclaim prior highs before rolling over again. Net corrective downtrend."
+  },
+  {
+    "date": "2026-06-26",
+    "ticker": "ES=F",
+    "expected_bias": "neutral",
+    "notes": "After the 06-15 rally high (~7622), price faded and then chopped in a wide ~7381-7470 range for the following week and a half (06-23: 7448, 06-24: 7470, 06-25: 7381, 06-26: 7402) with repeated failed bounces and no sustained follow-through in either direction - a sideways, low-conviction period rather than a clean trend, despite the modest net decline from the mid-June high."
+  },
+  {
+    "date": "2026-05-08",
+    "ticker": "NQ=F",
+    "expected_bias": "bullish",
+    "notes": "Daily closes rallied hard and cleanly from ~27645 (2026-04-30) to ~29333 (2026-05-08) - every single day closed higher than the last (27645 -> 27836 -> 27842 -> 28314 -> 28696 -> 28775 -> 29333), with no meaningful pullback along the way. A steep, unambiguous trending-up period."
+  },
+  {
+    "date": "2026-06-25",
+    "ticker": "NQ=F",
+    "expected_bias": "bearish",
+    "notes": "Price faded from the 06-15 high of ~30832 down to ~29357 by 06-25, making lower highs and lower lows overall (30832 -> 30467 -> 30399 -> 30507 -> 30555 -> 30383 -> 29745 -> 30037 -> 29357), with brief 06-18/06-21 and 06-24 consolidation bounces that each failed to reclaim the prior swing high before rolling over again. Net corrective downtrend."
+  }
+]
